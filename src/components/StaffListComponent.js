@@ -8,7 +8,7 @@ class StaffList extends Component {
   render() {
     const list = this.props.staffs.map((staff) => {
       return (
-        <div className="col-12 col-md-6">
+        <div className="col-md-4 col-sm-6 col-xs-12">
           <Card key={staff.id}>{staff.name}</Card>
         </div>
       );
