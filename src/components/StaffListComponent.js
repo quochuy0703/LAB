@@ -4,12 +4,39 @@ import { Card } from "reactstrap";
 class StaffList extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      staffSelected: null,
+    };
+  }
+
+  renderStaffSelected(item) {
+    console.log(item);
+    if (item != null) {
+      return (
+        <Card>
+          <h4>Ho va Ten: {item.name}</h4>
+          <p>Ngay sinh: {item.doB}</p>
+          <p>Ngay vao cong ty: {item.startDate}</p>
+          <p>Phong ban: {item.department.name}</p>
+          <p>So ngay nghi con lai: {item.annualLeave}</p>
+          <p>So ngay da lam them: {item.overTime}</p>
+        </Card>
+      );
+    } else {
+      return <div>Bam vao ten de chon</div>;
+    }
   }
   render() {
     const list = this.props.staffs.map((staff) => {
       return (
         <div className="col-md-4 col-sm-6 col-xs-12">
-          <Card key={staff.id}>{staff.name}</Card>
+          <Card
+            key={staff.id}
+            onClick={() => this.setState({ staffSelected: staff })}
+          >
+            {staff.name}
+          </Card>
         </div>
       );
     });
@@ -17,6 +44,9 @@ class StaffList extends Component {
     return (
       <div className="container">
         <div className="row">{list}</div>
+        <div className="row">
+          {this.renderStaffSelected(this.state.staffSelected)}
+        </div>
       </div>
     );
   }
