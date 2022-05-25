@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card } from "reactstrap";
+import dateFormat from "dateformat";
 
 class StaffList extends Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class StaffList extends Component {
       return (
         <Card>
           <h4>Ho va Ten: {item.name}</h4>
-          <p>Ngay sinh: {item.doB}</p>
-          <p>Ngay vao cong ty: {item.startDate}</p>
+          <p>Ngay sinh: {dateFormat(item.doB, "dd/mm/yyyy")}</p>
+          <p>Ngay vao cong ty: {dateFormat(item.startDate, "dd/mm/yyyy")}</p>
           <p>Phong ban: {item.department.name}</p>
           <p>So ngay nghi con lai: {item.annualLeave}</p>
           <p>So ngay da lam them: {item.overTime}</p>
