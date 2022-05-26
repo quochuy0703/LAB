@@ -12,10 +12,6 @@ import {
   Collapse,
   Nav,
   UncontrolledDropdown,
-  NavItem,
-  NavLink,
-  NavbarToggler,
-  NavbarText,
 } from "reactstrap";
 
 class App extends Component {
@@ -41,9 +37,9 @@ class App extends Component {
         <Navbar color="primary" expand="md" dark>
           <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
           <Collapse navbar>
-            <Nav className="me-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <UncontrolledDropdown inNavbar nav>
-                <DropdownToggle caret nav left>
+                <DropdownToggle caret nav right>
                   Cột hiển thị
                 </DropdownToggle>
                 <DropdownMenu>
