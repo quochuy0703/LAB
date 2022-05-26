@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, Row } from "reactstrap";
 import dateFormat from "dateformat";
 
 class StaffList extends Component {
@@ -46,30 +46,21 @@ class StaffList extends Component {
   render() {
     const list = this.props.staffs.map((staff) => {
       return (
-        <div className="col-md-4 col-sm-6 col-xs-12">
-          {/* <Card
-            key={staff.id}
-            onClick={() => this.setState({ staffSelected: staff })}
-          >
-            <div className="row">
-              <div className="col-3 text-center">
-                <img className="avatar" src={staff.image} />
-              </div>
-              <div className="col-6">
-                <p>{staff.name}</p>
-              </div>
-              <div className="col-3">
-                <p>{staff.department.name}</p>
-              </div>
-            </div>
-          </Card> */}
+        <div>
           <Card
             key={staff.id}
             onClick={() => this.setState({ staffSelected: staff })}
           >
-            <CardImg top src={staff.image} alt={staff.image} />
+            <CardImg
+              top
+              src={staff.image}
+              alt={staff.image}
+              className="avatar"
+            />
             <CardBody className="text-center">
-              <CardTitle>{staff.name}</CardTitle>
+              <CardTitle>
+                <strong>{staff.name}</strong>
+              </CardTitle>
             </CardBody>
           </Card>
         </div>
@@ -78,7 +69,9 @@ class StaffList extends Component {
 
     return (
       <div className="container">
-        <div className="row">{list}</div>
+        <Row md={this.props.sodong} sm="2" xs="1">
+          {list}
+        </Row>
         <div className="row">
           <div className="col-md-12 col-sm-12 col-xs-12 text-center">
             {this.renderStaffSelected(this.state.staffSelected)}
