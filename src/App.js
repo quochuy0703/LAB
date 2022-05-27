@@ -44,7 +44,7 @@ class App extends Component {
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown inNavbar nav>
                 <DropdownToggle caret nav right>
-                  Cột hiển thị
+                  <strong>Cột hiển thị</strong>
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem onClick={this.changeValue}>2</DropdownItem>
