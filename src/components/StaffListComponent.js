@@ -10,7 +10,9 @@ class StaffList extends Component {
       staffSelected: null,
     };
   }
-
+  //hàm render staff được chọn, dựa trên state
+  //tham số đầu vào là object nhân viên
+  //nếu tham số đầu vào là null thì sẽ hiện "bấn vào nhân viên để xem thông tin chi tiết"
   renderStaffSelected(item) {
     console.log(item);
     if (item != null) {
@@ -47,6 +49,7 @@ class StaffList extends Component {
     }
   }
   render() {
+    //list chứa danh sách nhân viên
     const list = this.props.staffs.map((staff) => {
       return (
         <div>
@@ -72,7 +75,7 @@ class StaffList extends Component {
 
     return (
       <div className="container">
-        <Row md={this.props.sodong} sm="2" xs="1">
+        <Row md={this.props.col} sm="2" xs="1">
           {list}
         </Row>
         <div className="row">

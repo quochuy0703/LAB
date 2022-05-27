@@ -14,12 +14,16 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
+//class App
 class App extends Component {
   constructor(props) {
     super(props);
+    //state chứa:
+    //staffs chứa thông tin của staff
+    //col lưu trạng thái số cột cần hiển thị, giá trị ban đầu là 3 (các giá trị là: 2, 3, 6)
     this.state = {
       staffs: STAFFS,
-      sodong: "3",
+      col: "3",
     };
     this.changeValue = this.changeValue.bind(this);
   }
@@ -28,7 +32,7 @@ class App extends Component {
     console.log(e.currentTarget.textContent);
     this.setState({
       staffs: STAFFS,
-      sodong: e.currentTarget.textContent,
+      col: e.currentTarget.textContent,
     });
   }
   render() {
@@ -52,7 +56,8 @@ class App extends Component {
           </Collapse>
         </Navbar>
         <h4 className="text-center">Danh sách nhân viên</h4>
-        <StaffList staffs={this.state.staffs} sodong={this.state.sodong} />
+        {/* component stafflist */}
+        <StaffList staffs={this.state.staffs} col={this.state.col} />
       </div>
     );
   }
