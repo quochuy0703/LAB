@@ -5,7 +5,8 @@ import dateFormat from "dateformat";
 class StaffList extends Component {
   constructor(props) {
     super(props);
-
+    //state chứa:
+    //staffSelected lưu trạng thái nhân viên được chọn, giá trị ban đầu là null
     this.state = {
       staffSelected: null,
     };
@@ -55,6 +56,7 @@ class StaffList extends Component {
         <div>
           <Card
             key={staff.id}
+            // khi người dùng click vào card thì sẽ thay đổi state, và lưu thông tin của staff vào state
             onClick={() => this.setState({ staffSelected: staff })}
           >
             <CardImg
@@ -75,10 +77,12 @@ class StaffList extends Component {
 
     return (
       <div className="container">
+        {/* render list nhân viên */}
         <Row md={this.props.col} sm="2" xs="1">
           {list}
         </Row>
         <div className="row">
+          {/* render nhân viên được chọn */}
           <div className="col-md-12 col-sm-12 col-xs-12 text-center">
             {this.renderStaffSelected(this.state.staffSelected)}
           </div>
