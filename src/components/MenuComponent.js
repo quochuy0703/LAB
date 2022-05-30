@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import React, { Component } from "react";
+import DishDetail from "./DishdetailComponent";
 
 class Menu extends Component {
   constructor(props) {
@@ -22,17 +23,9 @@ class Menu extends Component {
   }
 
   renderDish(dish) {
-    if (dish != null)
-      return (
-        <Card>
-          <CardImg top src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    else return <div></div>;
+    console.log(dish);
+    if (dish != null) return <DishDetail dish={dish} />;
+    else return <div>Nhấn vào món ăn để xem chi tiết</div>;
   }
 
   render() {
