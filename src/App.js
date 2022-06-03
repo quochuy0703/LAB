@@ -5,6 +5,11 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import Main from "./components/MainComponent";
 import { BrowserRouter } from "react-router-dom";
 
+import { Provider } from "react-redux";
+import { ConfigureStore } from "./redux/configureStore";
+
+const store = ConfigureStore();
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,17 +19,19 @@ class App extends Component {
   }
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          {/* <Navbar dark color="primary">
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App">
+            {/* <Navbar dark color="primary">
         <div className="container">
           <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
         </div>
       </Navbar>
       <Menu dishes={this.state.dishes} />; */}
-          <Main />
-        </div>
-      </BrowserRouter>
+            <Main />
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
