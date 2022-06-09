@@ -166,15 +166,21 @@ export const fetchLeaders = () => (dispatch) => {
   dispatch(leadersLoading());
 
   return fetch(baseUrl + "leaders")
-    .then((res) => {
-      if (res.ok) {
-        return res;
-      } else {
-        var err = new Error("Error " + res.status + ": " + res.statusText);
-        err.response = res;
-        throw err;
+    .then(
+      (res) => {
+        if (res.ok) {
+          return res;
+        } else {
+          var err = new Error("Error " + res.status + ": " + res.statusText);
+          err.response = res;
+          throw err;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
       }
-    })
+    )
     .then((res) => res.json())
     .then((res) => dispatch(addLeaders(res)))
     .catch((error) => {
