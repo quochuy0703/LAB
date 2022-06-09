@@ -7,28 +7,13 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors, actions } from "react-redux-form";
 import { Link } from "react-router-dom";
 
 class Contact extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   firstname: "",
-    //   lastname: "",
-    //   telnum: "",
-    //   email: "",
-    //   agree: false,
-    //   contactType: "Tel.",
-    //   message: "",
-    //   touched: {
-    //     firstname: false,
-    //     lastname: false,
-    //     telnum: false,
-    //     email: false,
-    //   },
-    // };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -47,6 +32,7 @@ class Contact extends Component {
   handleSubmit(values) {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+    this.props.resetFeedbackForm();
     // event.preventDefault();
   }
 
@@ -55,37 +41,6 @@ class Contact extends Component {
       touched: { ...this.state.touched, [field]: true },
     });
   };
-
-  // validate(firstname, lastname, telnum, email) {
-  //   const errors = {
-  //     firstname: "",
-  //     lastname: "",
-  //     telnum: "",
-  //     email: "",
-  //   };
-
-  //   if (this.state.touched.firstname && firstname.length < 3)
-  //     errors.firstname = "First Name should be >= 3 characters";
-  //   else if (this.state.touched.firstname && firstname.length > 10)
-  //     errors.firstname = "First Name should be <= 10 characters";
-
-  //   if (this.state.touched.lastname && lastname.length < 3)
-  //     errors.lastname = "Last Name should be >= 3 characters";
-  //   else if (this.state.touched.lastname && lastname.length > 10)
-  //     errors.lastname = "Last Name should be <= 10 characters";
-
-  //   const reg = /^\d+$/;
-  //   if (this.state.touched.telnum && !reg.test(telnum))
-  //     errors.telnum = "Tel. Number should contain only numbers";
-
-  //   if (
-  //     this.state.touched.email &&
-  //     email.split("").filter((x) => x === "@").length !== 1
-  //   )
-  //     errors.email = "Email should contain a @";
-
-  //   return errors;
-  // }
 
   render() {
     const required = (val) => val && val.length;
@@ -159,7 +114,10 @@ class Contact extends Component {
             <h3>Send us your Feedback</h3>
           </div>
           <div className="col-12 col-md-9">
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+            <Form
+              model="feedback"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <Row className="form-group">
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -321,7 +279,7 @@ class Contact extends Component {
                   </Button>
                 </Col>
               </Row>
-            </LocalForm>
+            </Form>
           </div>
         </div>
       </div>
