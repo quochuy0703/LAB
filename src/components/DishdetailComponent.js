@@ -13,27 +13,42 @@ import CommentForm from "./CommentForm";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
+
 function RenderDish({ dish }) {
   return (
-    <Card>
-      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-      <CardBody>
-        <CardTitle>{dish.name}</CardTitle>
-        <CardText>{dish.description}</CardText>
-      </CardBody>
-    </Card>
+    <FadeTransform
+      in
+      transformProps={{
+        exitTransform: "scale(0.5) translateY(-50%)",
+      }}
+    >
+      <Card>
+        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+        <CardBody>
+          <CardTitle>{dish.name}</CardTitle>
+          <CardText>{dish.description}</CardText>
+        </CardBody>
+      </Card>
+    </FadeTransform>
   );
 }
 
 function RenderComments({ comments, postComment, dishId }) {
-  let listComment = comments.map((item) => {
-    return (
-      <div>
-        <p>{item.comment}</p>
-        <p>-- {item.author}</p>
-      </div>
-    );
-  });
+  let listComment = (
+    <Stagger in>
+      {comments.map((item) => {
+        return (
+          <Fade in>
+            <div key={item.id}>
+              <p>{item.comment}</p>
+              <p>-- {item.author}</p>
+            </div>
+          </Fade>
+        );
+      })}
+    </Stagger>
+  );
   return (
     <div>
       <h4>Comments</h4>
