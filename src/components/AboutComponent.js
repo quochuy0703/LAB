@@ -8,13 +8,14 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
 
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
+  const leaders = props.leaders.leaders.map((leader) => {
     return (
       <div className="row">
         <div className="col-2">
-          <img src={leader.image} alt={leader.image} />
+          <img src={baseUrl + leader.image} alt={leader.image} />
         </div>
         <div className="col-10">
           <h4>{leader.name}</h4>

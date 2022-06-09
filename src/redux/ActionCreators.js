@@ -1,6 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
-import { DISHES } from "../shared/dishes";
 import { baseUrl } from "../shared/baseUrl";
+import { actions } from "react-redux-form";
 
 export const addComment = (comment) => ({
   type: ActionTypes.ADD_COMMENT,
@@ -161,3 +161,37 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
       alert("Your comment could not be posted\nError: " + error.message);
     });
 };
+
+export const fetchLeaders = () => (dispatch) => {
+  dispatch(leadersLoading());
+
+  return fetch(baseUrl + "leaders")
+    .then((res) => {
+      if (res.ok) {
+        return res;
+      } else {
+        var err = new Error("Error " + res.status + ": " + res.statusText);
+        err.response = res;
+        throw err;
+      }
+    })
+    .then((res) => res.json())
+    .then((res) => dispatch(addLeaders(res)))
+    .catch((error) => {
+      dispatch(leadersFailed(error.message));
+    });
+};
+
+export const addLeaders = (leaders) => ({
+  type: ActionTypes.ADD_LEADERS,
+  payload: leaders,
+});
+
+export const leadersLoading = () => ({
+  type: ActionTypes.LEADERS_LOADING,
+});
+
+export const leadersFailed = (errMess) => ({
+  type: ActionTypes.LEADERS_FAILED,
+  payload: errMess,
+});
