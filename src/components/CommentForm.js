@@ -32,9 +32,10 @@ class CommentForm extends Component {
       isOpen: !this.state.isOpen,
     });
   }
-  handleSubmit(values) {
-    alert(JSON.stringify(values));
-    this.props.addComment(
+  handleSubmit(values, e) {
+    e.preventDefault();
+    console.log(JSON.stringify(values));
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -55,7 +56,7 @@ class CommentForm extends Component {
           <Modal isOpen={this.state.isOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Comment</ModalHeader>
             <ModalBody>
-              <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+              <LocalForm onSubmit={(values, e) => this.handleSubmit(values, e)}>
                 <Row className="form-group">
                   <Label htmlFor="rating">Rating</Label>
                   <Control.select
