@@ -201,3 +201,50 @@ export const leadersFailed = (errMess) => ({
   type: ActionTypes.LEADERS_FAILED,
   payload: errMess,
 });
+
+export const postFeedback = (
+  firstname,
+  lastname,
+  telnum,
+  email,
+  agree,
+  contactType,
+  message
+) => {
+  let feedback = {
+    firstname: firstname,
+    lastname: lastname,
+    telnum: telnum,
+    email: email,
+    agree: agree,
+    contactType: contactType,
+    message: message,
+  };
+  feedback.date = new Date().toISOString();
+  return fetch(baseUrl + "feedback", {
+    method: "POST",
+    body: JSON.stringify(feedback),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (res) => {
+        if (res.ok) {
+          return res;
+        } else {
+          var err = new Error("Error " + res.status + ": " + res.statusText);
+          err.response = res;
+          throw err;
+        }
+      },
+      (error) => {
+        var err = new Error(error.message);
+        throw err;
+      }
+    )
+    .then((res) => res.json())
+    .then((res) => alert("Thank you for your feedback: " + JSON.stringify(res)))
+    .catch((err) => console.log(err.message));
+};

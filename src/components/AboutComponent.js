@@ -10,21 +10,29 @@ import {
 import { Link } from "react-router-dom";
 import { baseUrl } from "../shared/baseUrl";
 
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
+
 function About(props) {
-  const leaders = props.leaders.leaders.map((leader) => {
-    return (
-      <div className="row">
-        <div className="col-2">
-          <img src={baseUrl + leader.image} alt={leader.image} />
-        </div>
-        <div className="col-10">
-          <h4>{leader.name}</h4>
-          <p>{leader.designation}</p>
-          <p>{leader.description}</p>
-        </div>
-      </div>
-    );
-  });
+  const leaders = (
+    <Stagger in>
+      {props.leaders.leaders.map((leader) => {
+        return (
+          <Fade>
+            <div className="row">
+              <div className="col-2">
+                <img src={baseUrl + leader.image} alt={leader.image} />
+              </div>
+              <div className="col-10">
+                <h4>{leader.name}</h4>
+                <p>{leader.designation}</p>
+                <p>{leader.description}</p>
+              </div>
+            </div>
+          </Fade>
+        );
+      })}
+    </Stagger>
+  );
 
   return (
     <div className="container">

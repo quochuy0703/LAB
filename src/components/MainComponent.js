@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import {
+  postFeedback,
   postComment,
   addComment,
   fetchDishes,
@@ -52,6 +53,25 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchLeaders: () => {
     dispatch(fetchLeaders());
+  },
+  postFeedback: (
+    firstname,
+    lastname,
+    telnum,
+    email,
+    agree,
+    contactType,
+    message
+  ) => {
+    postFeedback(
+      firstname,
+      lastname,
+      telnum,
+      email,
+      agree,
+      contactType,
+      message
+    );
   },
 });
 
@@ -128,7 +148,10 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 component={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    postFeedback={this.props.postFeedback}
+                  />
                 )}
               />
               <Route
